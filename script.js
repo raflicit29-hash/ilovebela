@@ -26,8 +26,13 @@ for (let i = 0; i < 12; i++) {
   petals.appendChild(petal);
 }
 
+const memorySection = document.getElementById("memorySection");
 const letterSection = document.getElementById("letterSection");
 document.getElementById("openLetter").addEventListener("click", () => {
+  memorySection.hidden = false;
+  memorySection.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+document.getElementById("continueLetter").addEventListener("click", () => {
   letterSection.classList.add("visible");
   letterSection.scrollIntoView({ behavior: "smooth", block: "start" });
 });
