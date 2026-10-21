@@ -196,3 +196,20 @@ footer { position: relative; z-index: 1; text-align: center; color: #77778f; fon
 .apology-flourish { display: block; margin-top: 18px; color: #f0a8c0; letter-spacing: .3em; }
 @keyframes heartBeat { 0%,100% { transform: scale(1); opacity: .85; } 12% { transform: scale(1.12); opacity: 1; } 24% { transform: scale(1); } 36% { transform: scale(1.08); } }
 @media (prefers-reduced-motion: reduce) { .apology-heart { animation: none; } }
+
+
+/* Cute apology animation: tiny teddy bears, floating hearts, soft pink sparkle. */
+.sorry-bears { display:flex; justify-content:center; align-items:center; gap:8px; height:62px; margin:0 auto 4px; }
+.sorry-bear { display:inline-block; font-size:2rem; filter:drop-shadow(0 4px 8px rgba(255,159,190,.22)); animation:bearSway 2.6s ease-in-out infinite; }
+.bear-left { transform-origin:bottom center; }
+.bear-right { animation-delay:.35s; transform-origin:bottom center; }
+.bear-heart { display:inline-block; font-size:1.25rem; animation:heartHop 1.5s ease-in-out infinite; filter:drop-shadow(0 0 10px rgba(255,140,185,.4)); }
+.apology-moment { border-color:rgba(255,177,204,.4); background:
+  radial-gradient(ellipse at 50% 0%, rgba(255,126,177,.22), transparent 66%),
+  linear-gradient(145deg, rgba(80,37,66,.42), rgba(28,25,48,.68)); }
+.apology-moment::before { content:"✿"; animation:ornamentSpin 12s linear infinite; }
+.apology-moment::after { content:"♡"; color:rgba(255,177,204,.3); font-size:2.6rem; animation:heartHop 3s ease-in-out infinite; }
+@keyframes bearSway { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-7px) rotate(4deg); } }
+@keyframes heartHop { 0%,100% { transform:translateY(0) scale(.95); } 50% { transform:translateY(-7px) scale(1.12); } }
+@keyframes ornamentSpin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .sorry-bear,.bear-heart,.apology-moment::before,.apology-moment::after { animation:none; } }
