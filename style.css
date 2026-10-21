@@ -163,3 +163,36 @@ footer { position: relative; z-index: 1; text-align: center; color: #77778f; fon
 @media (prefers-reduced-motion: reduce) {
   .memory-card { opacity: 1; transform: none; animation: none; }
 }
+
+
+/* Pink apology accents: soft rose glow, drifting hearts and delicate flourishes. */
+:root {
+  --rose: #e58fa8;
+  --rose-light: #ffc4d4;
+}
+.star { background: #ffe3ef; }
+.floating-petal { color: #ff9fbe; opacity: .34; text-shadow: 0 0 12px rgba(255,145,185,.35); }
+.flower-glow { background: rgba(240,130,170,.18); }
+.p1 { fill: #c76b8c; }
+.p2 { fill: #e58fa8; }
+.p3 { fill: #ffd0df; }
+.apology-moment {
+  position: relative; max-width: 590px; margin: 38px auto 34px; padding: 30px clamp(20px, 5vw, 42px);
+  overflow: hidden; border: 1px solid rgba(255,177,204,.28); border-radius: 18px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(226,105,153,.16), transparent 65%),
+              linear-gradient(145deg, rgba(80,37,66,.36), rgba(28,25,48,.62));
+  box-shadow: 0 18px 55px rgba(0,0,0,.16), inset 0 0 32px rgba(255,177,204,.025);
+}
+.apology-moment::before, .apology-moment::after {
+  content: "✿"; position: absolute; color: rgba(255,177,204,.24); font-size: 2.3rem;
+}
+.apology-moment::before { top: 8px; left: 13px; transform: rotate(-18deg); }
+.apology-moment::after { right: 13px; bottom: 8px; transform: rotate(18deg); }
+.apology-heart { display: inline-block; color: var(--rose-light); font: 3rem "Cormorant Garamond",serif; line-height: 1;
+  text-shadow: 0 0 24px rgba(255,157,191,.5); animation: heartBeat 2.4s ease-in-out infinite; }
+.apology-kicker { margin: 12px 0 8px; color: #f0a8c0; font-size: .62rem; letter-spacing: .2em; }
+.apology-moment h3 { margin: 0 0 12px; color: #ffd1df; font: 500 clamp(2.4rem, 7vw, 3.4rem)/1 "Cormorant Garamond",serif; }
+.apology-moment > p:not(.apology-kicker) { max-width: 480px; margin: 0 auto; color: #e5d6df; font: 1.16rem/1.85 "Cormorant Garamond",serif; }
+.apology-flourish { display: block; margin-top: 18px; color: #f0a8c0; letter-spacing: .3em; }
+@keyframes heartBeat { 0%,100% { transform: scale(1); opacity: .85; } 12% { transform: scale(1.12); opacity: 1; } 24% { transform: scale(1); } 36% { transform: scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .apology-heart { animation: none; } }
