@@ -93,3 +93,33 @@ footer { position: relative; z-index: 1; text-align: center; color: #77778f; fon
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+
+/* Pemutar YouTube resmi untuk Risk It All */
+.music-panel {
+  position: relative;
+  z-index: 3;
+  width: min(680px, calc(100% - 32px));
+  margin: 0 auto 12px;
+  padding: clamp(15px, 3vw, 22px);
+  border: 1px solid rgba(240,189,199,.32);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(35,34,59,.97), rgba(19,20,39,.98));
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  animation: fadeUp .45s ease both;
+}
+.music-panel[hidden] { display: none; }
+.music-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+.music-kicker { margin: 0 0 5px; color: var(--gold); font-size: .62rem; letter-spacing: .16em; }
+.music-panel-heading h2 { margin: 0; color: var(--cream); font: 500 clamp(1.35rem, 4vw, 1.8rem)/1.15 "Cormorant Garamond", serif; }
+.music-panel-heading h2 span { color: var(--muted); font-size: .72em; }
+.music-close { flex: 0 0 auto; cursor: pointer; border: 1px solid rgba(240,189,199,.3); border-radius: 999px; padding: 8px 11px; background: rgba(255,255,255,.04); color: var(--cream); font-size: .78rem; }
+.music-close:hover { background: rgba(216,140,156,.15); }
+.music-video-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 11px; background: #080911; }
+.music-video-wrap iframe { display: block; width: 100%; height: 100%; border: 0; }
+.music-hint { margin: 10px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+@media (max-width: 520px) {
+  .music-panel { width: calc(100% - 22px); padding: 13px; border-radius: 14px; }
+  .music-panel-heading { align-items: flex-start; }
+  .music-panel-heading h2 span { display: block; margin-top: 2px; }
+}
