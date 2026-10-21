@@ -42,37 +42,28 @@ document.getElementById("backTop").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Pemutar resmi YouTube: dimuat hanya setelah pengunjung menekan tombol.
-const musicToggle = document.getElementById("musicToggle");
-const musicLabel = document.getElementById("musicLabel");
-const musicPanel = document.getElementById("musicPanel");
-const closeMusic = document.getElementById("closeMusic");
-const riskItAllPlayer = document.getElementById("riskItAllPlayer");
-const officialVideoUrl = riskItAllPlayer.dataset.src;
+// Musik latar otomatis tanpa menu. Browser HP bisa memblokir autoplay bersuara;
+// jika itu terjadi, musik akan dicoba lagi saat pengunjung menyentuh halaman.
+const backgroundMusic = document.getElementById("backgroundMusic");
+let musicStarted = false;
 
-function openMusic() {
-  musicPanel.hidden = false;
-  // Muat video setelah klik agar tidak memulai audio tanpa interaksi pengguna.
-  if (riskItAllPlayer.src === "about:blank" || riskItAllPlayer.getAttribute("src") === "about:blank") {
-    riskItAllPlayer.src = officialVideoUrl;
+async function startBackgroundMusic() {
+  if (!backgroundMusic || musicStarted) return;
+  try {
+    await backgroundMusic.play();
+    musicStarted = true;
+    document.removeEventListener("pointerdown", startBackgroundMusic);
+    document.removeEventListener("keydown", startBackgroundMusic);
+    document.removeEventListener("touchstart", startBackgroundMusic);
+  } catch (_) {
+    // Autoplay ditolak oleh browser; tunggu interaksi pertama, tanpa tombol khusus.
   }
-  musicToggle.setAttribute("aria-pressed", "true");
-  musicLabel.textContent = "Tutup pemutar";
 }
 
-function stopMusic() {
-  musicPanel.hidden = true;
-  // Menghapus src menghentikan pemutaran saat panel ditutup.
-  riskItAllPlayer.src = "about:blank";
-  musicToggle.setAttribute("aria-pressed", "false");
-  musicLabel.textContent = "Putar When I Was Your Man";
-}
-
-musicToggle.addEventListener("click", () => {
-  if (musicPanel.hidden) openMusic();
-  else stopMusic();
-});
-closeMusic.addEventListener("click", stopMusic);
+startBackgroundMusic();
+document.addEventListener("pointerdown", startBackgroundMusic, { passive: true });
+document.addEventListener("touchstart", startBackgroundMusic, { passive: true });
+document.addEventListener("keydown", startBackgroundMusic);
 
 
 // Secret message interaction: reveals only when Bela chooses to open it.
