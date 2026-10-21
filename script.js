@@ -59,7 +59,7 @@ function stopMusic() {
   // Menghapus src menghentikan pemutaran saat panel ditutup.
   riskItAllPlayer.src = "about:blank";
   musicToggle.setAttribute("aria-pressed", "false");
-  musicLabel.textContent = "Putar Risk It All";
+  musicLabel.textContent = "Putar Talking to the Moon";
 }
 
 musicToggle.addEventListener("click", () => {
