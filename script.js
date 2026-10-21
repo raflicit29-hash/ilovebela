@@ -73,3 +73,14 @@ musicToggle.addEventListener("click", () => {
   else stopMusic();
 });
 closeMusic.addEventListener("click", stopMusic);
+
+
+// Secret message interaction: reveals only when Bela chooses to open it.
+const secretNoteButton = document.getElementById("secretNoteButton");
+const secretNote = document.getElementById("secretNote");
+secretNoteButton.addEventListener("click", () => {
+  const isOpening = secretNote.hidden;
+  secretNote.hidden = !isOpening;
+  secretNoteButton.setAttribute("aria-expanded", String(isOpening));
+  secretNoteButton.textContent = isOpening ? "Tutup pesan ♡" : "Buka pesan kecil ♡";
+});
