@@ -15,10 +15,11 @@ for (let i = 0; i < 72; i++) {
   starField.appendChild(star);
 }
 
-for (let i = 0; i < 12; i++) {
+for (let i = 0; i < 18; i++) {
   const petal = document.createElement("span");
   petal.className = "floating-petal";
-  petal.textContent = Math.random() > 0.5 ? "✧" : "❀";
+  const ornaments = ["✧", "❀", "♡", "✿"];
+  petal.textContent = ornaments[Math.floor(Math.random() * ornaments.length)];
   petal.style.left = `${Math.random() * 100}%`;
   petal.style.fontSize = `${10 + Math.random() * 13}px`;
   petal.style.setProperty("--fall-duration", `${12 + Math.random() * 15}s`);
