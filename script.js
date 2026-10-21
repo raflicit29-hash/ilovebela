@@ -84,3 +84,20 @@ secretNoteButton.addEventListener("click", () => {
   secretNoteButton.setAttribute("aria-expanded", String(isOpening));
   secretNoteButton.textContent = isOpening ? "Tutup pesan ♡" : "Buka pesan kecil ♡";
 });
+
+
+// Cinematic reveal on scroll; gracefully falls back when IntersectionObserver is unavailable.
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("scene-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll(".memory-card, .apology-moment, .secret-note-wrap, .letter-card, .ending").forEach((scene) => {
+    scene.classList.add("scene-reveal");
+    revealObserver.observe(scene);
+  });
+}
