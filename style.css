@@ -681,3 +681,25 @@ body.hug-screen-open { overflow:hidden; }
   .hug-screen,.hug-screen-sparkles,.hug-screen-bear.big-hugging .hug-bear-emoji,
   .hug-screen-bear.big-hugging .hug-bear-arm,.hug-screen-bear.big-hugging .hug-bear-heart { animation:none!important; }
 }
+
+
+/* Bela's interactive comfort gifts: thumb-friendly on mobile. */
+.bela-gifts { width:min(540px,100%); margin:28px auto; padding:24px 16px; border:1px solid rgba(255,196,212,.32); border-radius:22px; background:linear-gradient(145deg,rgba(255,196,212,.1),rgba(255,255,255,.025)); }
+.bela-gifts h3 { margin:10px 0 6px; color:#ffe1eb; font:500 clamp(1.8rem,6vw,2.5rem) "Cormorant Garamond",serif; }
+.bela-gifts > p { margin:0 auto 18px; color:#e9cbd7; font:1.13rem/1.5 "Cormorant Garamond",serif; }
+.bela-gift-choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; }
+.bela-gift-choice { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; min-height:105px; padding:12px 8px; border:1px solid rgba(255,196,212,.38); border-radius:17px; background:rgba(255,218,230,.07); color:#ffe7ef; font-size:2rem; cursor:pointer; transition:transform .2s,background .2s; }
+.bela-gift-choice span { font:600 .77rem "DM Sans",sans-serif; }
+.bela-gift-choice:hover,.bela-gift-choice:focus-visible { background:rgba(255,196,212,.18); transform:translateY(-3px); }
+.bela-gift-result { position:relative; overflow:hidden; margin-top:18px; padding:22px 15px; border:1px solid rgba(255,213,228,.3); border-radius:18px; background:rgba(32,18,37,.52); }
+.bela-gift-result[hidden] { display:none; }
+.bela-gift-result.gift-pop { animation:belaGiftReveal .55s ease both; }
+.bela-gift-art { font-size:clamp(4rem,18vw,6rem); animation:bigHugSparkle 2s ease-in-out infinite alternate; }
+.bela-gift-result h4 { margin:10px 0; color:#ffd5e3; font:500 1.9rem "Cormorant Garamond",serif; }
+.bela-gift-result p { position:relative; z-index:1; margin:0 auto 18px; max-width:430px; color:#f9e4ec; font:1.25rem/1.7 "Cormorant Garamond",serif; }
+.bela-gift-close { border:1px solid rgba(255,213,228,.5); border-radius:999px; padding:11px 18px; color:#fff0f5; background:rgba(255,196,212,.12); cursor:pointer; }
+.bela-gift-floating-heart { position:absolute; bottom:0; color:#ffbad3; font-size:2rem; pointer-events:none; animation:belaGiftHearts 2.3s ease-out forwards; }
+@keyframes belaGiftReveal { from {opacity:0;transform:translateY(13px) scale(.96)} to {opacity:1;transform:translateY(0) scale(1)} }
+@keyframes belaGiftHearts { from {opacity:0;transform:translateY(0) scale(.5)} 25% {opacity:1} to {opacity:0;transform:translateY(-250px) scale(1.4)} }
+@media(max-width:370px) { .bela-gifts {padding:18px 10px} .bela-gift-choice {min-height:94px} }
+@media(prefers-reduced-motion:reduce) { .bela-gift-result.gift-pop,.bela-gift-art,.bela-gift-floating-heart {animation:none!important} }
