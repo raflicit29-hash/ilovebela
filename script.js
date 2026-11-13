@@ -42,29 +42,66 @@ document.getElementById("backTop").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Musik latar otomatis tanpa menu. Browser HP bisa memblokir autoplay bersuara;
-// jika itu terjadi, musik akan dicoba lagi saat pengunjung menyentuh halaman.
-const backgroundMusic = document.getElementById("backgroundMusic");
-let musicStarted = false;
+// Official YouTube player for A Thousand Years — user-controlled, no forced autoplay.
+const musicPlayToggle = document.getElementById("musicPlayToggle");
+const musicPlayerStatus = document.getElementById("musicPlayerStatus");
+let belaSongPlayer = null;
+let youtubeApiReady = false;
 
-async function startBackgroundMusic() {
-  if (!backgroundMusic || musicStarted) return;
-  try {
-    await backgroundMusic.play();
-    musicStarted = true;
-    document.removeEventListener("pointerdown", startBackgroundMusic);
-    document.removeEventListener("keydown", startBackgroundMusic);
-    document.removeEventListener("touchstart", startBackgroundMusic);
-  } catch (_) {
-    // Autoplay ditolak oleh browser; tunggu interaksi pertama, tanpa tombol khusus.
-  }
+function setMusicStatus(message) {
+  if (musicPlayerStatus) musicPlayerStatus.textContent = message;
 }
 
-startBackgroundMusic();
-document.addEventListener("pointerdown", startBackgroundMusic, { passive: true });
-document.addEventListener("touchstart", startBackgroundMusic, { passive: true });
-document.addEventListener("keydown", startBackgroundMusic);
+function updateMusicButton(state) {
+  if (!musicPlayToggle) return;
+  const playing = state === 1;
+  musicPlayToggle.textContent = playing ? "Jeda lagu Ⅱ" : "Putar lagu ▶";
+  musicPlayToggle.setAttribute("aria-label", playing ? "Jeda lagu" : "Putar lagu");
+  musicPlayToggle.classList.toggle("is-playing", playing);
+  setMusicStatus(playing ? "Sedang diputar · A Thousand Years" : "Siap diputar kapan saja ♡");
+}
 
+function initBelaYouTubePlayer() {
+  if (!youtubeApiReady || belaSongPlayer || !document.getElementById("youtubePlayer")) return;
+  belaSongPlayer = new YT.Player("youtubePlayer", {
+    videoId: "rtOvBOTyX00",
+    playerVars: { playsinline: 1, controls: 0, rel: 0, modestbranding: 1, origin: window.location.origin },
+    events: {
+      onReady: () => {
+        if (musicPlayToggle) musicPlayToggle.disabled = false;
+        if (musicPlayToggle) musicPlayToggle.textContent = "Putar lagu ▶";
+        setMusicStatus("Siap menemani cerita kalian ♡");
+      },
+      onStateChange: event => updateMusicButton(event.data),
+      onError: () => {
+        setMusicStatus("Lagu tidak dapat dimuat. Coba buka video resmi di YouTube.");
+        if (musicPlayToggle) musicPlayToggle.disabled = true;
+      }
+    }
+  });
+}
+
+window.onYouTubeIframeAPIReady = () => {
+  youtubeApiReady = true;
+  initBelaYouTubePlayer();
+};
+
+if (musicPlayToggle) {
+  musicPlayToggle.addEventListener("click", () => {
+    if (!belaSongPlayer || typeof belaSongPlayer.getPlayerState !== "function") return;
+    const state = belaSongPlayer.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      belaSongPlayer.pauseVideo();
+    } else {
+      belaSongPlayer.playVideo();
+    }
+  });
+}
+
+const youtubeApiScript = document.createElement("script");
+youtubeApiScript.src = "https://www.youtube.com/iframe_api";
+youtubeApiScript.async = true;
+document.head.appendChild(youtubeApiScript);
 
 // Secret message interaction: reveals only when Bela chooses to open it.
 const secretNoteButton = document.getElementById("secretNoteButton");
