@@ -404,3 +404,38 @@ body::before {
 @media(prefers-reduced-motion:reduce) {
   .comfort-teddy.is-hugging span,.comfort-teddy.is-hugging::after,.hug-heart-burst { animation:none!important; }
 }
+
+
+/* Official A Thousand Years player with a clear, accessible play/pause control. */
+.music-player {
+  position:relative; z-index:3; width:min(560px,calc(100% - 36px)); margin:0 auto 18px;
+  padding:17px; border:1px solid rgba(255,196,212,.27); border-radius:18px;
+  background:linear-gradient(145deg,rgba(68,39,62,.82),rgba(31,23,39,.92));
+  box-shadow:0 16px 48px rgba(0,0,0,.2); backdrop-filter:blur(10px);
+}
+.music-player-heading { display:flex; align-items:center; gap:12px; margin-bottom:13px; }
+.music-player-icon { display:grid; place-items:center; flex:0 0 42px; height:42px; border-radius:50%;
+  color:#ffd0df; background:rgba(229,143,168,.14); border:1px solid rgba(255,196,212,.22); font-size:1.25rem; }
+.music-player-copy { min-width:0; text-align:left; flex:1; }
+.music-player-kicker { color:#e7a9bf; font-size:.56rem; letter-spacing:.2em; }
+.music-player-copy h2 { margin:3px 0 0; color:#fff0eb; font:500 1.3rem/1.1 "Cormorant Garamond",serif; }
+.music-player-copy h2 span { color:#d0b7c6; font-size:.78em; }
+.music-player-heart { color:#ffc4d4; font-size:1.5rem; animation:heartHop 2.5s ease-in-out infinite; }
+.youtube-frame { width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:11px; background:#120d17; }
+.youtube-frame iframe { display:block; width:100%; height:100%; border:0; }
+.music-player-controls { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:13px; }
+.music-play-toggle { cursor:pointer; min-width:126px; border:1px solid rgba(255,196,212,.55); border-radius:999px;
+  padding:11px 17px; color:#fff0eb; background:linear-gradient(135deg,rgba(229,143,168,.28),rgba(255,255,255,.04));
+  transition:transform .2s,background .2s; }
+.music-play-toggle:hover:not(:disabled) { transform:translateY(-2px); background:rgba(229,143,168,.32); }
+.music-play-toggle:disabled { opacity:.58; cursor:wait; }
+.music-play-toggle.is-playing { border-color:rgba(255,196,212,.8); background:rgba(229,143,168,.32); }
+.music-player-status { color:#d0b7c6; font-size:.72rem; }
+.music-official-link { display:inline-block; margin-top:10px; color:#e7a9bf; font-size:.7rem; text-decoration:none; }
+.music-official-link:hover { color:#ffc4d4; text-decoration:underline; }
+@media(max-width:520px) {
+  .music-player { width:calc(100% - 24px); padding:13px; margin-bottom:14px; }
+  .music-player-copy h2 { font-size:1.15rem; }
+  .music-player-controls { gap:9px; }
+}
+@media(prefers-reduced-motion:reduce) { .music-player-heart { animation:none; } }
