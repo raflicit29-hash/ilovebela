@@ -430,7 +430,7 @@ body::before {
 .music-play-toggle:hover:not(:disabled) { transform:translateY(-2px); background:rgba(229,143,168,.32); }
 .music-play-toggle:disabled { opacity:.58; cursor:wait; }
 .music-play-toggle.is-playing { border-color:rgba(255,196,212,.8); background:rgba(229,143,168,.32); }
-.music-player-status { color:#d0b7c6; font-size:.72rem; }
+.music-player-status { color:#d0b7c6; font-size:.72rem; margin:10px 0 0; line-height:1.5; }
 .music-official-link { display:inline-block; margin-top:10px; color:#e7a9bf; font-size:.7rem; text-decoration:none; }
 .music-official-link:hover { color:#ffc4d4; text-decoration:underline; }
 @media(max-width:520px) {
