@@ -514,3 +514,170 @@ body::before {
 @media(max-width:520px) {
   .comfort-teddy.is-hugging::before { width:76px; height:36px; }
 }
+
+
+/* Full-screen teddy hug for phones and small screens. */
+body.hug-screen-open { overflow:hidden; }
+.hug-screen[hidden] { display:none !important; }
+.hug-screen {
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(10px,2.3vh,22px);
+  overflow-y:auto;
+  padding: max(24px,env(safe-area-inset-top)) 22px max(24px,env(safe-area-inset-bottom));
+  text-align:center;
+  color:#fff2f5;
+  background:
+    radial-gradient(ellipse at 50% 42%,rgba(255,191,211,.28),transparent 43%),
+    radial-gradient(ellipse at 12% 10%,rgba(255,255,255,.12),transparent 35%),
+    linear-gradient(155deg,#3d263f 0%,#75435f 48%,#2b2038 100%);
+  animation:hugScreenFade .45s ease both;
+}
+.hug-screen::before,.hug-screen::after {
+  content:"";
+  position:absolute;
+  width:clamp(170px,52vw,360px);
+  aspect-ratio:1;
+  border:1px solid rgba(255,225,235,.12);
+  border-radius:50%;
+  pointer-events:none;
+}
+.hug-screen::before { transform:scale(1.28); }
+.hug-screen::after { transform:scale(1.62); }
+.hug-screen-close {
+  position:absolute;
+  top:max(16px,env(safe-area-inset-top));
+  right:18px;
+  z-index:5;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,235,242,.35);
+  border-radius:50%;
+  color:#fff1f5;
+  background:rgba(255,255,255,.1);
+  font-size:1rem;
+  cursor:pointer;
+}
+.hug-screen-kicker,.hug-screen-footnote {
+  position:relative;
+  z-index:2;
+  color:#ffd5e2;
+  font-size:.67rem;
+  letter-spacing:.17em;
+}
+.hug-screen-sparkles {
+  position:relative;
+  z-index:2;
+  color:#ffe4ed;
+  font-size:1.3rem;
+  letter-spacing:.3em;
+  animation:bigHugSparkle 2s ease-in-out infinite alternate;
+}
+.hug-screen-bear {
+  position:relative;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  width:clamp(220px,65vw,330px);
+  height:clamp(220px,65vw,330px);
+  flex:0 0 auto;
+  border:1px solid rgba(255,230,239,.3);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,222,233,.23),rgba(255,255,255,.055) 62%,transparent 70%);
+  box-shadow:0 0 75px rgba(255,174,202,.18),inset 0 0 35px rgba(255,255,255,.07);
+}
+.hug-bear-emoji {
+  display:block;
+  font-size:clamp(8rem,38vw,12rem);
+  line-height:1;
+  filter:drop-shadow(0 18px 18px rgba(25,10,25,.28));
+  transform-origin:50% 78%;
+}
+.hug-bear-arm {
+  position:absolute;
+  z-index:2;
+  top:52%;
+  width:clamp(54px,18vw,82px);
+  height:clamp(28px,9vw,42px);
+  border:clamp(7px,2.4vw,10px) solid #bd8067;
+  border-radius:50%;
+  opacity:0;
+}
+.hug-bear-arm-left { left:12%; transform:rotate(25deg); }
+.hug-bear-arm-right { right:12%; transform:rotate(-25deg); }
+.hug-bear-heart {
+  position:absolute;
+  z-index:3;
+  top:12%;
+  color:#ffb5cf;
+  font-size:clamp(2.2rem,9vw,3.4rem);
+  opacity:0;
+  text-shadow:0 0 24px rgba(255,170,204,.85);
+}
+.hug-screen-bear.big-hugging .hug-bear-emoji { animation:fullScreenBearHug 1.5s cubic-bezier(.2,.8,.25,1) both; }
+.hug-screen-bear.big-hugging .hug-bear-arm { animation:fullScreenArms 1.35s ease both; }
+.hug-screen-bear.big-hugging .hug-bear-heart { animation:fullScreenHeart 1.5s ease-out both; }
+.hug-screen h2 {
+  position:relative;
+  z-index:2;
+  margin:0;
+  color:#fff2f5;
+  font:500 clamp(2.2rem,8vw,3.6rem)/.98 "Cormorant Garamond",serif;
+}
+.hug-screen h2 em { color:#ffd0df; font-weight:400; }
+.hug-screen-message {
+  position:relative;
+  z-index:2;
+  width:min(420px,100%);
+  margin:0;
+  color:#f8e5eb;
+  font:1.16rem/1.65 "Cormorant Garamond",serif;
+}
+.hug-screen-again {
+  position:relative;
+  z-index:2;
+  border:1px solid rgba(255,224,235,.58);
+  border-radius:999px;
+  padding:13px 25px;
+  color:#fff5f7;
+  background:linear-gradient(135deg,rgba(255,190,213,.28),rgba(255,255,255,.08));
+  box-shadow:0 8px 28px rgba(25,10,25,.18);
+  font-size:.95rem;
+  cursor:pointer;
+}
+.hug-screen-again:active { transform:scale(.97); }
+.hug-screen-footnote { margin:0; font-size:.6rem; letter-spacing:.08em; }
+@keyframes hugScreenFade { from { opacity:0; } to { opacity:1; } }
+@keyframes fullScreenBearHug {
+  0% { transform:translateY(10px) scale(.78) rotate(0); }
+  22% { transform:translateY(-10px) scale(1.12) rotate(-7deg); }
+  45% { transform:translateY(-3px) scale(1.22) rotate(6deg); }
+  68% { transform:translateY(-5px) scale(1.15) rotate(0); }
+  100% { transform:translateY(0) scale(1) rotate(0); }
+}
+@keyframes fullScreenArms {
+  0%,15% { opacity:0; }
+  42%,72% { opacity:1; transform:scale(1.12) rotate(0); }
+  100% { opacity:0; }
+}
+@keyframes fullScreenHeart {
+  0% { opacity:0; transform:translateY(22px) scale(.3); }
+  35%,70% { opacity:1; transform:translateY(-8px) scale(1.15); }
+  100% { opacity:0; transform:translateY(-35px) scale(.7); }
+}
+@keyframes bigHugSparkle { from { opacity:.55; transform:scale(.92); } to { opacity:1; transform:scale(1.08); } }
+@media(max-height:700px) {
+  .hug-screen { gap:8px; }
+  .hug-screen-bear { width:min(42vh,250px); height:min(42vh,250px); }
+  .hug-bear-emoji { font-size:min(28vh,8rem); }
+  .hug-screen-message { font-size:1.04rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hug-screen,.hug-screen-sparkles,.hug-screen-bear.big-hugging .hug-bear-emoji,
+  .hug-screen-bear.big-hugging .hug-bear-arm,.hug-screen-bear.big-hugging .hug-bear-heart { animation:none!important; }
+}
