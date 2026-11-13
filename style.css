@@ -439,3 +439,7 @@ body::before {
   .music-player-controls { gap:9px; }
 }
 @media(prefers-reduced-motion:reduce) { .music-player-heart { animation:none; } }
+
+
+/* Autoplay layout: no separate play/pause button. */
+.music-player-status { display:block; margin:11px 2px 0; color:#d0b7c6; font-size:.76rem; line-height:1.6; }
