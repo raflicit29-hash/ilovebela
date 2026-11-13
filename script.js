@@ -216,3 +216,57 @@ if (comfortLetterButton && comfortLetter) {
     comfortLetterButton.textContent = opening ? "Tutup surat kecil ♡" : "Buka surat kecil untukmu ✉";
   });
 }
+
+
+// Bela chooses her own little comfort gift.
+const giftResult = document.getElementById("belaGiftResult");
+const giftArt = document.getElementById("belaGiftArt");
+const giftTitle = document.getElementById("belaGiftTitle");
+const giftMessage = document.getElementById("belaGiftMessage");
+const giftOptions = {
+  flower: {
+    art: "💐", title: "Bunga cantik untuk Bela",
+    message: "Bunga ini memang virtual, tapi rasa sayangku beneran. Semoga ada satu hal kecil hari ini yang bikin kamu tersenyum, ya. 🌷"
+  },
+  hearts: {
+    art: "💗", title: "Seribu hati buat kamu",
+    message: "Kalau satu hati belum cukup, aku kirim banyak! Kamu spesial banget buat aku, Bel. ♡"
+  },
+  letter: {
+    art: "💌", title: "Surat rahasia untuk perempuan hebatku",
+    message: "Bel, ada satu hal yang mau aku bisikin: aku bangga sama kamu. Bukan karena kamu harus selalu kuat atau berhasil dalam semua hal, tapi karena kamu tetap berusaha, bahkan saat hari-harimu nggak mudah. Perlakuan orang lain nggak menentukan seberapa berharganya kamu. Kamu berhak bahagia, didengarkan, dan disayang dengan baik. Kalau capek, istirahat dulu. Kalau mau cerita, aku dengerin. Aku mungkin nggak selalu punya jawaban, tapi aku akan terus berusaha ada buat kamu. Dan kalau hari ini kamu belum bisa tersenyum, nggak apa-apa. Aku tetap sayang kamu, Bela. ♡"
+  }
+};
+document.querySelectorAll(".bela-gift-choice").forEach(button => {
+  button.addEventListener("click", () => {
+    const type = button.dataset.gift;
+    if (type === "hug") {
+      openBigHug();
+      return;
+    }
+    const gift = giftOptions[type];
+    if (!gift || !giftResult) return;
+    giftArt.textContent = gift.art;
+    giftTitle.textContent = gift.title;
+    giftMessage.textContent = gift.message;
+    giftResult.hidden = false;
+    giftResult.classList.remove("gift-pop");
+    void giftResult.offsetWidth;
+    giftResult.classList.add("gift-pop");
+    if (type === "hearts") {
+      for (let i = 0; i < 24; i++) {
+        const heart = document.createElement("span");
+        heart.className = "bela-gift-floating-heart";
+        heart.textContent = i % 2 ? "♡" : "♥";
+        heart.style.left = (5 + Math.random() * 90) + "%";
+        heart.style.animationDelay = (Math.random() * .65) + "s";
+        giftResult.appendChild(heart);
+        heart.addEventListener("animationend", () => heart.remove(), {once:true});
+      }
+    }
+    giftResult.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+});
+document.getElementById("belaGiftClose")?.addEventListener("click", () => {
+  if (giftResult) giftResult.hidden = true;
+});
