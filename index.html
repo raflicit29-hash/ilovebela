@@ -20,7 +20,22 @@
     <span>sebuah surat kecil</span>
     <span class="music-note" aria-label="Musik latar">♫</span>
   </header>
-  <audio id="backgroundMusic" src="assets/audio/SnapTik.Net_7582913680359050516.mp3" autoplay loop preload="auto"></audio>
+  <section class="music-player" aria-label="Pemutar lagu untuk Bela">
+    <div class="music-player-heading">
+      <span class="music-player-icon" aria-hidden="true">♫</span>
+      <div class="music-player-copy">
+        <span class="music-player-kicker">OUR SONG</span>
+        <h2>A Thousand Years <span>— Christina Perri</span></h2>
+      </div>
+      <span class="music-player-heart" aria-hidden="true">♡</span>
+    </div>
+    <div class="youtube-frame"><div id="youtubePlayer" title="A Thousand Years — Christina Perri"></div></div>
+    <div class="music-player-controls">
+      <button class="music-play-toggle" id="musicPlayToggle" type="button" disabled aria-label="Putar lagu">Menyiapkan lagu…</button>
+      <span class="music-player-status" id="musicPlayerStatus" role="status" aria-live="polite">Pemutar resmi YouTube sedang disiapkan</span>
+    </div>
+    <a class="music-official-link" href="https://www.youtube.com/watch?v=rtOvBOTyX00" target="_blank" rel="noopener noreferrer">Buka video resmi di YouTube ↗</a>
+  </section>
 
   <main>
     <section class="hero" id="hero">
