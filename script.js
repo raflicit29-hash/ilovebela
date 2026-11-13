@@ -118,13 +118,29 @@ if (closeComfortButton && comfortSection) {
     openComfortButton?.focus({ preventScroll: true });
   });
 }
-if (hugButton && hugFeedback) {
+if (hugButton && hugFeedback && comfortTeddy) {
+  let hugCount = 0;
   hugButton.addEventListener("click", () => {
+    hugCount += 1;
     hugFeedback.hidden = false;
-    comfortSection?.classList.remove("is-hugging");
-    void comfortSection?.offsetWidth;
-    comfortSection?.classList.add("is-hugging");
+    hugFeedback.textContent = hugCount === 1
+      ? "Peluk hangat buat kamu, Bel. Kamu nggak sendirian. ♡"
+      : "Satu peluk lagi, yang lebih erat. Semoga hatimu terasa lebih ringan. ♡";
     hugButton.textContent = "Peluk lagi 🩷";
+
+    // Restart the embrace animation on every press, including repeated presses.
+    comfortTeddy.classList.remove("is-hugging");
+    void comfortTeddy.offsetWidth;
+    comfortTeddy.classList.add("is-hugging");
+
+    // Add a fresh burst of floating hearts for every hug.
+    const burst = document.createElement("span");
+    burst.className = "hug-heart-burst";
+    burst.setAttribute("aria-hidden", "true");
+    burst.textContent = "♡  ♥  ♡";
+    comfortTeddy.appendChild(burst);
+    burst.addEventListener("animationend", () => burst.remove(), { once: true });
+    window.setTimeout(() => burst.remove(), 1800);
   });
 }
 if (comfortLetterButton && comfortLetter) {
