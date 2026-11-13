@@ -127,6 +127,36 @@ const hugFeedback = document.getElementById("hugFeedback");
 const comfortTeddy = document.getElementById("comfortTeddy");
 const comfortLetterButton = document.getElementById("comfortLetterButton");
 const comfortLetter = document.getElementById("comfortLetter");
+const hugScreen = document.getElementById("hugScreen");
+const hugScreenBear = document.getElementById("hugScreenBear");
+const hugScreenAgain = document.getElementById("hugScreenAgain");
+const closeHugScreen = document.getElementById("closeHugScreen");
+
+function replayBigHug() {
+  if (!hugScreenBear) return;
+  hugScreenBear.classList.remove("big-hugging");
+  void hugScreenBear.offsetWidth;
+  hugScreenBear.classList.add("big-hugging");
+}
+function openBigHug() {
+  if (!hugScreen) return;
+  hugScreen.hidden = false;
+  document.body.classList.add("hug-screen-open");
+  replayBigHug();
+  closeHugScreen?.focus({ preventScroll: true });
+}
+function closeBigHug() {
+  if (!hugScreen) return;
+  hugScreen.hidden = true;
+  document.body.classList.remove("hug-screen-open");
+  hugButton?.focus({ preventScroll: true });
+}
+hugScreenAgain?.addEventListener("click", replayBigHug);
+closeHugScreen?.addEventListener("click", closeBigHug);
+hugScreen?.addEventListener("click", event => {
+  if (event.target === hugScreen) closeBigHug();
+});
+
 
 if (openComfortButton && comfortSection) {
   openComfortButton.addEventListener("click", () => {
@@ -173,6 +203,9 @@ if (hugButton && hugFeedback && comfortTeddy) {
       comfortTeddy.classList.remove("is-hugging");
       teddyFace?.classList.remove("is-hugging");
     }, 1250);
+
+    // Open a dedicated full-screen bear hug so it is clear on small phone screens.
+    openBigHug();
   });
 }
 if (comfortLetterButton && comfortLetter) {
