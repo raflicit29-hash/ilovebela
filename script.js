@@ -152,19 +152,27 @@ if (hugButton && hugFeedback && comfortTeddy) {
       : "Satu peluk lagi, yang lebih erat. Semoga hatimu terasa lebih ringan. ♡";
     hugButton.textContent = "Peluk lagi 🩷";
 
-    // Restart the embrace animation on every press, including repeated presses.
+    // Restart the hug animation reliably on every press.
+    const teddyFace = comfortTeddy.querySelector("span");
     comfortTeddy.classList.remove("is-hugging");
+    teddyFace?.classList.remove("is-hugging");
     void comfortTeddy.offsetWidth;
     comfortTeddy.classList.add("is-hugging");
+    teddyFace?.classList.add("is-hugging");
 
-    // Add a fresh burst of floating hearts for every hug.
     const burst = document.createElement("span");
     burst.className = "hug-heart-burst";
     burst.setAttribute("aria-hidden", "true");
     burst.textContent = "♡  ♥  ♡";
     comfortTeddy.appendChild(burst);
     burst.addEventListener("animationend", () => burst.remove(), { once: true });
-    window.setTimeout(() => burst.remove(), 1800);
+    window.setTimeout(() => burst.remove(), 1900);
+
+    // Clear the temporary class after the embrace so it can replay next time.
+    window.setTimeout(() => {
+      comfortTeddy.classList.remove("is-hugging");
+      teddyFace?.classList.remove("is-hugging");
+    }, 1250);
   });
 }
 if (comfortLetterButton && comfortLetter) {
