@@ -44,6 +44,7 @@ document.getElementById("backTop").addEventListener("click", () => {
 
 // A Thousand Years — mencoba diputar otomatis saat halaman dibuka.
 const musicPlayerStatus = document.getElementById("musicPlayerStatus");
+const musicPlayButton = document.getElementById("musicPlayButton");
 let belaSongPlayer = null;
 let youtubeApiReady = false;
 
@@ -64,10 +65,13 @@ function initBelaYouTubePlayer() {
       onStateChange: event => {
         if (event.data === YT.PlayerState.PLAYING) {
           setMusicStatus("Sedang diputar · A Thousand Years ♡");
+          if (musicPlayButton) { musicPlayButton.textContent = "♫ Lagu sedang diputar"; musicPlayButton.classList.add("is-playing"); }
         } else if (event.data === YT.PlayerState.PAUSED) {
-          setMusicStatus("Lagu dijeda.");
+          setMusicStatus("Lagu dijeda. Sentuh tombol untuk memutar lagi ♡");
+          if (musicPlayButton) { musicPlayButton.textContent = "▶ Putar lagu kita ♡"; musicPlayButton.classList.remove("is-playing"); }
         } else if (event.data === YT.PlayerState.ENDED) {
           setMusicStatus("Terima kasih sudah mendengarkan sampai selesai. ♡");
+          if (musicPlayButton) { musicPlayButton.textContent = "↻ Putar lagi ♡"; musicPlayButton.classList.remove("is-playing"); }
         }
       },
       onAutoplayBlocked: () => {
@@ -79,6 +83,15 @@ function initBelaYouTubePlayer() {
     }
   });
 }
+
+musicPlayButton?.addEventListener("click", () => {
+  if (!belaSongPlayer || typeof belaSongPlayer.playVideo !== "function") {
+    setMusicStatus("Pemutar sedang disiapkan. Coba sentuh sekali lagi sebentar ya. ♡");
+    return;
+  }
+  belaSongPlayer.playVideo();
+  setMusicStatus("Memulai A Thousand Years... ♡");
+});
 
 window.onYouTubeIframeAPIReady = () => {
   youtubeApiReady = true;
