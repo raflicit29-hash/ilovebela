@@ -92,3 +92,46 @@ if ("IntersectionObserver" in window) {
     revealObserver.observe(scene);
   });
 }
+
+
+// I LOVE BELA 2.0 — optional comfort space. Existing story, letter and music stay intact.
+const comfortSection = document.getElementById("comfortSection");
+const openComfortButton = document.getElementById("openComfort");
+const closeComfortButton = document.getElementById("closeComfort");
+const hugButton = document.getElementById("hugButton");
+const hugFeedback = document.getElementById("hugFeedback");
+const comfortTeddy = document.getElementById("comfortTeddy");
+const comfortLetterButton = document.getElementById("comfortLetterButton");
+const comfortLetter = document.getElementById("comfortLetter");
+
+if (openComfortButton && comfortSection) {
+  openComfortButton.addEventListener("click", () => {
+    comfortSection.hidden = false;
+    comfortSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (closeComfortButton) closeComfortButton.focus({ preventScroll: true });
+  });
+}
+if (closeComfortButton && comfortSection) {
+  closeComfortButton.addEventListener("click", () => {
+    comfortSection.hidden = true;
+    document.getElementById("hero")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    openComfortButton?.focus({ preventScroll: true });
+  });
+}
+if (hugButton && hugFeedback) {
+  hugButton.addEventListener("click", () => {
+    hugFeedback.hidden = false;
+    comfortSection?.classList.remove("is-hugging");
+    void comfortSection?.offsetWidth;
+    comfortSection?.classList.add("is-hugging");
+    hugButton.textContent = "Peluk lagi 🩷";
+  });
+}
+if (comfortLetterButton && comfortLetter) {
+  comfortLetterButton.addEventListener("click", () => {
+    const opening = comfortLetter.hidden;
+    comfortLetter.hidden = !opening;
+    comfortLetterButton.setAttribute("aria-expanded", String(opening));
+    comfortLetterButton.textContent = opening ? "Tutup surat kecil ♡" : "Buka surat kecil untukmu ✉";
+  });
+}
